@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link Hub - Premium Suite</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Light and Dark Global Layout Base Classes */
+        html.dark body {
+            background: radial-gradient(circle at top right, #1e1b4b, #0f172a, #020617);
+            color: #f1f5f9;
+        }
+        html.light body {
+            background: #ffffff;
+            color: #0f172a;
+        }
+
+        /* Glass Cards Adaptability Configuration Matrices */
+        html.dark .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        html.light .glass-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body class="font-sans min-h-screen flex flex-col justify-between overflow-x-hidden transition-colors duration-300">
+
+    <div id="landing-page" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-slate-950 px-4 transition-all duration-700 ease-in-out">
+        <div class="absolute w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl top-1/4 left-1/4 animate-pulse"></div>
+        <div class="absolute w-96 h-96 bg-emerald-600/10 rounded-full blur-3xl bottom-1/4 right-1/4 animate-pulse"></div>
+
+        <div class="glass-card max-w-xl w-full p-8 md:p-12 rounded-3xl shadow-2xl text-center relative z-10 border border-slate-800 space-y-8 transform transition-transform duration-500 scale-100 bg-slate-900/80">
+            <div class="space-y-3">
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-indigo-500/10 text-indigo-400 rounded-2xl text-3xl mb-2 border border-indigo-500/20 shadow-inner">
+                    <i class="fas fa-cubes"></i>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-black tracking-tight bg-gradient-to-r from-white via-indigo-200 to-indigo-400 bg-clip-text text-transparent">Welcome to Link Hub</h1>
+                <p class="text-sm text-slate-400 font-medium tracking-wide">A High-Performance Serverless Utility Ecosystem</p>
+                <div class="w-24 h-1 bg-indigo-500 mx-auto rounded-full mt-2"></div>
+            </div>
+
+            <div class="py-5 border-y border-slate-800 bg-slate-900/40 rounded-2xl px-4 space-y-2">
+                <p class="text-xs uppercase font-bold tracking-widest text-indigo-400">Engineered & Developed By</p>
+                <h2 class="text-2xl font-extrabold text-white tracking-wide">Panth Shah</h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm">
+                <a href="https://linkedin.com/in/panth-shah-445144389" target="_blank" class="flex items-center justify-center gap-3 bg-slate-950 hover:bg-blue-600 border border-slate-800 hover:border-blue-500 px-4 py-3 rounded-xl transition-all duration-300 shadow-sm group">
+                    <i class="fab fa-linkedin-in text-blue-400 group-hover:text-white text-base"></i>
+                    <span class="font-medium text-slate-300 group-hover:text-white">LinkedIn</span>
+                </a>
+                <a href="https://github.com/PanthShah2007" target="_blank" class="flex items-center justify-center gap-3 bg-slate-950 hover:bg-slate-800 border border-slate-800 hover:border-slate-600 px-4 py-3 rounded-xl transition-all duration-300 shadow-sm group">
+                    <i class="fab fa-github text-slate-300 group-hover:text-white text-base"></i>
+                    <span class="font-medium text-slate-300 group-hover:text-white">GitHub</span>
+                </a>
+                <a href="mailto:panthshah2007@gmail.com" class="flex items-center justify-center gap-3 bg-slate-950 hover:bg-emerald-600 border border-slate-800 hover:border-emerald-500 px-4 py-3 rounded-xl transition-all duration-300 shadow-sm group">
+                    <i class="far fa-envelope text-emerald-400 group-hover:text-white text-base"></i>
+                    <span class="font-medium text-slate-300 group-hover:text-white">Email</span>
+                </a>
+            </div>
+
+            <button onclick="launchAppSuite()" class="w-full bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white font-bold py-4 px-6 rounded-2xl shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer flex items-center justify-center gap-2 tracking-wide text-base">
+                <span>Enter Workstation App Suite</span>
+                <i class="fas fa-arrow-right text-xs"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="app-shell" class="hidden opacity-0 transition-opacity duration-700 flex flex-col flex-grow">
+        <header class="border-b border-slate-800/80 dark:border-slate-800/30 bg-white/60 dark:bg-slate-950/60 backdrop-blur-md px-6 py-4 sticky top-0 z-40">
+            <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+                <div class="text-center sm:text-left">
+                    <h1 class="text-2xl font-black tracking-tight dark:text-white flex items-center justify-center sm:justify-start gap-2">🔗 Link Hub</h1>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">High Performance Core Processing Sandbox Framework</p>
+                </div>
+                
+                <div class="flex items-center gap-4">
+                    <button onclick="toggleThemeSystem()" class="bg-indigo-600 text-white hover:bg-indigo-500 px-4 py-2 rounded-xl text-xs font-bold shadow flex items-center gap-2 transition cursor-pointer">
+                        <span id="theme-btn-icon"><i class="fas fa-sun"></i></span>
+                        <span id="theme-btn-text">Light Mode</span>
+                    </button>
+                    <div class="flex items-center gap-3 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 px-4 py-2 rounded-xl text-xs font-medium">
+                        <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                        <span class="text-slate-500 dark:text-slate-400">Architect:</span>
+                        <strong class="dark:text-white font-semibold">Panth Shah</strong>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="max-w-6xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 md:grid-cols-4 gap-6 flex-grow items-start">
+            
+            <div class="md:col-span-1 glass-card p-4 rounded-2xl flex flex-col gap-2">
+                <p class="text-[10px] font-bold tracking-wider text-indigo-500 dark:text-indigo-400 uppercase px-3 mb-1">Available Systems</p>
+                <nav class="space-y-1">
+                    <button onclick="switchTab('qr-tab')" id="btn-qr-tab" class="tab-btn w-full text-left px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-200 bg-indigo-600 text-white shadow-md cursor-pointer flex items-center gap-3">
+                        <i class="fas fa-qrcode text-base"></i>
+                        <span>QR Code Generator</span>
+                    </button>
+                    <button onclick="switchTab('pdf-tab')" id="btn-pdf-tab" class="tab-btn w-full text-left px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-200 text-slate-500 dark:text-slate-400 hover:text-indigo-500 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-slate-800/40 cursor-pointer flex items-center gap-3">
+                        <i class="fas fa-file-pdf text-base"></i>
+                        <span>1-Click PDF Maker</span>
+                    </button>
+                </nav>
+            </div>
+
+            <section class="md:col-span-3 glass-card p-6 md:p-8 rounded-2xl flex flex-col justify-between min-h-[520px]">
+                <div class="flex-grow">
+                    
+                    <div id="qr-tab" class="tab-content block space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold tracking-tight">QR Code Generation Suite</h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Transforms text strings or web hyperlinks into a high-density matrix output script.</p>
+                        </div>
+                        
+                        <div class="max-w-xl space-y-4">
+                            <div class="space-y-1">
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400">Target Data String Payload</label>
+                                <input type="text" id="qr-input" placeholder="Paste data string or hyperlink registry target here..." class="w-full p-3.5 border border-slate-300 dark:border-slate-800 focus:border-indigo-500 rounded-xl bg-white dark:bg-slate-950/60 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none transition font-medium text-sm">
+                            </div>
+                            <button onclick="generateQRCode()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-6 py-3.5 rounded-xl transition-all duration-200 cursor-pointer shadow-md flex items-center gap-2 text-sm">
+                                <i class="fas fa-bolt"></i>
+                                <span>Compile & Generate QR</span>
+                            </button>
+                        </div>
+                        
+                        <div id="qr-result-container" class="hidden flex flex-col items-center p-8 border-2 border-dashed border-slate-300 dark:border-slate-800 rounded-2xl bg-slate-50 dark:bg-slate-950/40 max-w-sm mx-auto text-center transform transition-all duration-300 space-y-4">
+                            <div id="qrcode" class="p-3.5 bg-white rounded-2xl shadow-2xl inline-block"></div>
+                            
+                            <button onclick="shareQRCodeAsset()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 px-4 rounded-xl shadow transition-all duration-200 flex items-center justify-center gap-2 text-xs cursor-pointer">
+                                <i class="fas fa-share-alt"></i>
+                                <span id="share-btn-text">Share QR Code</span>
+                            </button>
+
+                            <p class="text-[11px] text-slate-500 font-medium"><i class="fas fa-info-circle mr-1 text-indigo-500"></i> Shares directly on mobile or copies directly to clipboard on desktop.</p>
+                        </div>
+                    </div>
+
+                    <div id="pdf-tab" class="tab-content hidden space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold tracking-tight">1-Click Multi-Page HD PDF Compiler</h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Converts text descriptions and multiple chosen images simultaneously into a structured multi-page PDF presentation asset.</p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+                            <div class="space-y-4">
+                                <div class="space-y-1">
+                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400">Document File Header Title</label>
+                                    <input type="text" id="pdf-title" placeholder="Project Report, Photo Catalog, Presentation Album..." class="w-full p-3.5 border border-slate-300 dark:border-slate-800 focus:border-indigo-500 rounded-xl bg-white dark:bg-slate-950/60 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none transition font-semibold text-sm">
+                                </div>
+                                
+                                <div class="space-y-1">
+                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400">Choose Images (Select Multiple Allowed)</label>
+                                    <div class="relative w-full border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-950/60 p-3 rounded-xl transition flex flex-col gap-2">
+                                        <input type="file" id="pdf-image" accept="image/*" multiple onchange="processMultiplePDFImages(event)" class="w-full text-xs text-slate-500 dark:text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-indigo-500/10 file:text-indigo-600 dark:file:text-indigo-400 hover:file:bg-indigo-500/20 file:transition cursor-pointer">
+                                        <div id="image-counter" class="text-xs text-indigo-500 font-bold hidden px-2 py-1 bg-indigo-500/5 border border-indigo-500/10 rounded-lg w-fit">0 Images Uploaded</div>
+                                    </div>
+                                </div>
+
+                                <button onclick="downloadDirectClientPDF()" class="w-full bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg transition-all duration-200 flex items-center justify-center gap-2 text-sm cursor-pointer">
+                                    <i class="fas fa-file-download"></i>
+                                    <span>Download & Generate PDF File</span>
+                                </button>
+                            </div>
+
+                            <div class="space-y-1 h-full flex flex-col">
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400">Document Front Page Introductory Copy Text</label>
+                                <textarea id="pdf-content" rows="8" placeholder="Draft or paste comprehensive descriptions. This text content will cleanly occupy Page 1, followed directly by your chosen photo slides on separate subsequent pages..." class="w-full p-3.5 border border-slate-300 dark:border-slate-800 focus:border-indigo-500 rounded-xl bg-white dark:bg-slate-950/60 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none transition text-sm flex-grow resize-none leading-relaxed"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="mt-8 pt-4 border-t border-slate-200 dark:border-slate-800/60 flex flex-wrap gap-3 justify-between items-center text-[11px] font-medium text-slate-400 dark:text-slate-500">
+                    <span class="flex items-center gap-1.5"><i class="fas fa-terminal text-indigo-500"></i> System: Standalone Encapsulated Client-Side Kernel Sandbox Architecture</span>
+                    <span class="bg-indigo-500/5 text-indigo-600 dark:text-indigo-400 px-3 py-1 rounded-full border border-indigo-500/10">Engine Signature Validated</span>
+                </div>
+            </section>
+        </main>
+
+        <footer class="bg-slate-100 dark:bg-slate-950/40 border-t border-slate-200 dark:border-slate-900 text-center py-4 text-xs font-medium text-slate-400 dark:text-slate-500 tracking-wide">
+            &copy; 2026 Link Hub Engine. Architecture Configured & Custom Programmed by <span class="text-slate-600 dark:text-slate-400 font-semibold">Panth Shah</span>. All privileges reserved.
+        </footer>
+    </div>
+
+    <div style="opacity: 0; position: absolute; z-index: -999; pointer-events: none;">
+        <div id="hidden-pdf-canvas-target" style="width: 650px; background: #ffffff; color: #0f172a; font-family: Arial, sans-serif;">
+            </div>
+    </div>
+
+    <script>
+        // Transition welcome page landing block viewport configuration module sequence
+        function launchAppSuite() {
+            const landing = document.getElementById('landing-page');
+            const shell = document.getElementById('app-shell');
+            
+            landing.classList.add('opacity-0', 'scale-95');
+            setTimeout(() => {
+                landing.classList.add('hidden');
+                shell.classList.remove('hidden');
+                setTimeout(() => {
+                    shell.classList.remove('opacity-0');
+                }, 50);
+            }, 700);
+        }
+
+        // System Layout UI Theme Toggle Engine
+        function toggleThemeSystem() {
+            const root = document.documentElement;
+            const btnIcon = document.getElementById('theme-btn-icon');
+            const btnText = document.getElementById('theme-btn-text');
+
+            if (root.classList.contains('dark')) {
+                root.classList.remove('dark');
+                root.classList.add('light');
+                btnIcon.innerHTML = '<i class="fas fa-moon"></i>';
+                btnText.innerText = 'Dark Mode';
+            } else {
+                root.classList.remove('light');
+                root.classList.add('dark');
+                btnIcon.innerHTML = '<i class="fas fa-sun"></i>';
+                btnText.innerText = 'Light Mode';
+            }
+        }
+
+        // Interface Tab Panel Workspace Array State Machine Controller
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white', 'shadow-md');
+                btn.classList.add('text-slate-500', 'dark:text-slate-400', 'hover:text-indigo-500', 'dark:hover:text-white', 'hover:bg-slate-200/50', 'dark:hover:bg-slate-800/40');
+            });
+
+            document.getElementById(tabId).classList.remove('hidden');
+            const activeBtn = document.getElementById(`btn-${tabId}`);
+            activeBtn.classList.add('bg-indigo-600', 'text-white', 'shadow-md');
+            activeBtn.classList.remove('text-slate-500', 'dark:text-slate-400', 'hover:text-indigo-500', 'dark:hover:text-white', 'hover:bg-slate-200/50', 'dark:hover:bg-slate-800/40');
+        }
+
+        // FUNCTION ENGINE 1: QR CODE MATRIX COMPILER DRIVER
+        function generateQRCode() {
+            const input = document.getElementById('qr-input').value.trim();
+            const container = document.getElementById('qr-result-container');
+            const qrTargetDiv = document.getElementById('qrcode');
+            
+            if (!input) {
+                alert('Action Aborted: Please input a valid text data string payload or web hyperlink location.');
+                return;
+            }
+
+            qrTargetDiv.innerHTML = "";
+            container.classList.remove('hidden');
+
+            new QRCode(qrTargetDiv, {
+                text: input,
+                width: 170,
+                height: 170,
+                colorDark : "#0f172a",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        }
+
+        // MOBILE HYBRID NATIVE SHARE / CLIPBOARD ENGINE
+        async function shareQRCodeAsset() {
+            const qrImageElement = document.querySelector('#qrcode img');
+            const shareBtnText = document.getElementById('share-btn-text');
+            
+            if (!qrImageElement) {
+                alert('Error: No active QR code matrix asset detected.');
+                return;
+            }
+
+            try {
+                const base64DataUrl = qrImageElement.src;
+                const response = await fetch(base64DataUrl);
+                const imageBlob = await response.blob();
+                const imageFileArray = [new File([imageBlob], 'qr_code_matrix.png', { type: 'image/png' })];
+
+                if (navigator.canShare && navigator.canShare({ files: imageFileArray })) {
+                    await navigator.share({
+                        files: imageFileArray,
+                        title: 'QR Code Asset',
+                        text: 'Generated securely via Link Hub Suite.'
+                    });
+                } else {
+                    const clipboardItemInstance = new ClipboardItem({ 'image/png': imageBlob });
+                    await navigator.clipboard.write([clipboardItemInstance]);
+                    
+                    shareBtnText.innerText = "Copied to Clipboard!";
+                    setTimeout(() => {
+                        shareBtnText.innerText = "Share QR Code";
+                    }, 2500);
+                }
+            } catch (error) {
+                console.error("System Share Interceptor Block Event:", error);
+                alert('Unable to complete share channel operation automatically. Use right-click or long-press to manually save.');
+            }
+        }
+
+        // FUNCTION ENGINE 2: RECONFIGURED MULTI-PAGE OFFLINE PDF COMPILER
+        let uploadedImagesBase64Array = [];
+
+        // Dynamic multi-file reader map structure configuration loop
+        function processMultiplePDFImages(event) {
+            const targetFiles = event.target.files;
+            const counterBadge = document.getElementById('image-counter');
+            
+            uploadedImagesBase64Array = []; // Reset old data stack arrays
+            
+            if (targetFiles.length === 0) {
+                counterBadge.classList.add('hidden');
+                return;
+            }
+
+            counterBadge.innerText = `${targetFiles.length} Image(s) Staged Successfully`;
+            counterBadge.classList.remove('hidden');
+
+            // Iterate over selected file arrays and load asynchronously into binary strings
+            Array.from(targetFiles).forEach(file => {
+                const readerInstance = new FileReader();
+                readerInstance.onloadend = function() {
+                    uploadedImagesBase64Array.push(readerInstance.result);
+                };
+                readerInstance.readAsDataURL(file);
+            });
+        }
+
+        function downloadDirectClientPDF() {
+            const documentTitleText = document.getElementById('pdf-title').value.trim();
+            const documentContentBodyText = document.getElementById('pdf-content').value.trim();
+            const canvasMasterElementContainer = document.getElementById('hidden-pdf-canvas-target');
+
+            if (!documentTitleText || !documentContentBodyText) {
+                alert('Action Denied: Data mapping fields cannot be left blank. Provide text data parameters.');
+                return;
+            }
+
+            // Flush old HTML cache buffers from memory rendering node entirely
+            canvasMasterElementContainer.innerHTML = "";
+
+            // PAGE 1 BUILD BLOCK: Text Introduction Content Sheet Structure
+            let page1HTMLBlockStructure = `
+                <div style="padding: 40px; min-height: 790px; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box;">
+                    <div>
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #e2e8f0; padding-bottom: 15px; margin-bottom: 25px;">
+                            <div>
+                                <h1 style="font-size: 26px; font-weight: 800; color: #4f46e5; margin: 0;">${documentTitleText}</h1>
+                                <p style="font-size: 11px; color: #94a3b8; margin: 4px 0 0 0;">Link Hub Document System Export</p>
+                            </div>
+                            <div style="text-align: right; font-size: 11px; color: #64748b;">
+                                <strong style="color: #0f172a;">Platform Node</strong>
+                                <p style="margin: 2px 0 0 0;">Panth Shah Suite</p>
+                            </div>
+                        </div>
+                        <p style="font-size: 13px; line-height: 1.65; color: #334155; text-align: justify; white-space: pre-line; margin: 0;">${documentContentBodyText}</p>
+                    </div>
+                    <div style="border-top: 1px solid #e2e8f0; padding-top: 15px; display: flex; justify-content: space-between; font-size: 9px; color: #94a3b8; text-transform: uppercase;">
+                        <span>Page 1 | Front Introduction Sheet</span>
+                        <span>Developed By: <strong style="color: #4f46e5;">Panth Shah</strong></span>
+                    </div>
+                </div>
+            `;
+
+            // Append Page 1 to our compilation node tree frame
+            canvasMasterElementContainer.innerHTML += page1HTMLBlockStructure;
+
+            // SUBSEQUENT PAGES BUILD BLOCK: Loop and isolate each individual image onto separate slides
+            uploadedImagesBase64Array.forEach((imageBase64Data, index) => {
+                // html2pdf.js uses standard CSS page-break classes to cleanly slice documents completely
+                let subsequentPageHTMLBlockStructure = `
+                    <div class="html2pdf__page-break" style="padding: 40px; min-height: 790px; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box;">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #e2e8f0; padding-bottom: 15px; margin-bottom: 25px;">
+                                <div>
+                                    <h1 style="font-size: 20px; font-weight: 800; color: #4f46e5; margin: 0;">${documentTitleText}</h1>
+                                    <p style="font-size: 11px; color: #94a3b8; margin: 4px 0 0 0;">Attached Graphical Component Media Slide</p>
+                                </div>
+                                <div style="text-align: right; font-size: 11px; color: #64748b;">
+                                    <strong style="color: #0f172a;">Media Matrix</strong>
+                                    <p style="margin: 2px 0 0 0;">Slide Asset #${index + 1}</p>
+                                </div>
+                            </div>
+                            <div style="text-align: center; margin-top: 40px;">
+                                <img src="${imageBase64Data}" style="max-width: 100%; max-height: 500px; border-radius: 8px; border: 1px solid #cbd5e1; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
+                            </div>
+                        </div>
+                        <div style="border-top: 1px solid #e2e8f0; padding-top: 15px; display: flex; justify-content: space-between; font-size: 9px; color: #94a3b8; text-transform: uppercase;">
+                            <span>Page ${index + 2} | Attached Image Attachment Asset</span>
+                            <span>Developed By: <strong style="color: #4f46e5;">Panth Shah</strong></span>
+                        </div>
+                    </div>
+                `;
+                canvasMasterElementContainer.innerHTML += subsequentPageHTMLBlockStructure;
+            });
+
+            // Production compiler properties parameter configuration mapping payload
+            const conversionPipelineConfigurationSettings = {
+                margin:       0, // Zero out wrapper page margins to prevent double conflict layouts with inline container paddings
+                filename:     documentTitleText.toLowerCase().replace(/[^a-z0-9]/g, '_') + '_compiled_album.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, logging: false, useCORS: true },
+                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+
+            // Initialize compiler system generation directly
+            html2pdf().set(conversionPipelineConfigurationSettings).from(canvasMasterElementContainer).save();
+        }
+    </script>
+</body>
+</html>
